@@ -33,6 +33,7 @@ body {
     padding: 0;
     overflow: hidden;
     background-color: #7b7aaf;
+    height: 48px;
 }
 
 #navbar li {
@@ -47,12 +48,13 @@ body {
     text-decoration: none;
 }
 
-.nvar li a:hover {
+#navbar li a:hover {
     background-color: #9695D4;
 }
 
 #navbar li.dropdown {
-    display: inline-block;
+    display: block;
+    float: right;
 }
 
 #navbar .dropdown-content {
@@ -62,6 +64,9 @@ body {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    right:8px;
+    top: 56px;
+    height: 43px;
 }
 
 #navbar .dropdown-content a {
@@ -69,7 +74,7 @@ body {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    text-align: left;
+
 }
 
 #navbar .dropdown-content a:hover {
@@ -78,6 +83,12 @@ body {
 
 #navbar .dropdown:hover .dropdown-content {
     display: block;
+}
+
+#navbar .icon {
+    font-size:x-large;
+    display: inline-block;
+    vertical-align: top;
 }
 
 /* drawing */
