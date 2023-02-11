@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Drawing Board</title>
+    <style>
+        #board {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .pen {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            border-radius: 25px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="board"></div>
+    <div id="color-palette">
+        <div class="pen" id="red" style="background-color: red;"></div>
+        <div class="pen" id="green" style="background-color: green;"></div>
+        <div class="pen" id="blue" style="background-color: blue;"></div>
+        <div class="pen" id="yellow" style="background-color: yellow;"></div>
+        <div class="pen" id="black" style="background-color: black;"></div>
+        <button id="save-button">Save</button>
+
+    </div>
+    <script>
+        const board = document.getElementById("board");
+        const colorPalette = document.getElementById("color-palette");
+        let currentColor = "black";
+
+        // Create the canvas element
+        const canvas = document.createElement("canvas");
+        canvas.width = board.offsetWidth;
+        canvas.height = board.offsetHeight;
+        board.appendChild(canvas);
+
+        // Get the 2D context of the canvas
+        const ctx = canvas.getContext("2d");
+
+        // Listen for mouse events on the canvas
+        let isDrawing = false;
+        canvas.addEventListener("mousedown", e => {
+            isDrawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
+        });
+        canvas.addEventListener("mouseup", () => (isDrawing = false));
+        canvas.addEventListener("mouseout", () => (isDrawing = false));
+        canvas.addEventListener("mousemove", e => {
+            if (isDrawing) {
+            ctx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
+            ctx.strokeStyle = currentColor;
+            ctx.stroke();
+            }
+        });
+
+        // Listen for click events on the color palette
+        colorPalette.addEventListener("click", e => {
+            if (e.target.className === "pen") {
+            currentColor = window.getComputedStyle(e.target).backgroundColor;
+            }
+        });
+        
+        const saveButton = document.getElementById("save-button");
+        
+        // Listen for click events on the save button
+        saveButton.addEventListener("click", () => {
+            const link = document.createElement("a");
+            link.download = "drawing.png";
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+        </script>
+    </body>
+</html>
