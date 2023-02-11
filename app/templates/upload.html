@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="title">What do you want to make today?</h1>
+<audio loop src="{{ url_for('static', filename='pillars.mp3') }}" autoplay></audio>
+
+<form method = "POST" enctype = "multipart/form-data">
+    <select name="prompt" id="prompt">
+        {% for prompt in prompts %}
+            <option value="{{ prompt }}">{{ prompt }}</option>
+        {% endfor %}
+    </select><br>
+    <label for="title">Title your piece:</label>
+    <input type="text" name="title">
+    <h3>Upload your image here</h3>
+    <input type="file" name="file" class="upload button"/>
+    <input type="submit"/>
+</form>
+{% endblock %}

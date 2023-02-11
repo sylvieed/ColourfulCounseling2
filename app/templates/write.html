@@ -4,18 +4,17 @@
     <div class="container write">
         <div class="col">
             <img src="{{ url_for('static', filename=image) }}" class="drawing">
-
         </div>
         <div class="col">
             <form method="POST">
                 <div class="field">
-                    <label for="prompt1" class="label prompt title" >What did you draw?</label><br>
+                    <label for="prompt1" class="label prompt title">What did you draw?</label><br>
                     <textarea name="prompt1" cols="80" rows="7"></textarea>
-                </div><br>
+                </div>
                 <div class="field">
                     <label for="prompt2" class="label prompt title">How did you feel before and after completing your artwork?</label><br>
                     <textarea name="prompt2" cols="80" rows="7"></textarea>
-                </div><br>
+                </div>
                 <div class="field">
                     <label for="prompt3" class="label prompt title">Write anything else about your artwork here:</label><br>
                     <textarea name="prompt3" cols="80" rows="7"></textarea>
@@ -67,6 +66,7 @@
             {
                 background-color: #7b7aaf;
             }
-            </style>
+        </style>
     </div>
+
 {% endblock %}

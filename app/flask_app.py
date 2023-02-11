@@ -114,6 +114,8 @@ def draw():
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('write'))
+        else:
+            print("no file")
 
     return render_template('draw.html', prompts = draw_prompts)
 
