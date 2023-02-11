@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<audio loop src="{{ url_for('static', filename='violet.mp3') }}" autoplay></audio>
     <h1 class="title">New Journal Entry</h1>
             <img src="{{ url_for('static', filename='journal.gif') }}">
         <div class="col buttons">
