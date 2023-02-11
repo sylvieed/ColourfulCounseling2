@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2 class = "title">What do you want to create about today?</h2>
+<h2 class = "title">What do you want to create today?</h2>
     <form method = "POST" enctype = "multipart/form-data">
         <select name="prompt" id="prompt">
             {% for prompt in prompts %}
@@ -18,7 +18,7 @@
         <div class="pen" id="yellow" style="background-color: yellow;"></div>
         <div class="pen" id="black" style="background-color: black;"></div>
     </div>
-    <p>no mistakes just happy accidents - bob ross</p>
+    <p>no mistakes, just happy accidents - bob ross</p>
     <div>
         
         <button id="save-button" style="background-color:#7b7aaf;  color: white; border-color: white;">Save</button>
