@@ -3,6 +3,7 @@
   <head>
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>ColorfulCounseling</title>
     {% endblock %}
   </head>
@@ -10,13 +11,13 @@
     <div id="navbar">
       <div class="center">
         <ul>
-          <li><a href="{{ url_for('home') }}">home</a></li>
+          <li><a href="{{ url_for('home') }}"><span class="material-symbols-rounded icon">home</span></a></li>
           <li><a href="{{ url_for('about') }}">about</a></li>
-          <li><a href="{{ url_for('new') }}">start</a></li>
+          <li><a href="{{ url_for('new') }}"><b>start</b></a></li>
           <li><a href="{{ url_for('journals') }}">past entries</a></li>
           <li><a href="{{ url_for('resources') }}">resources</a></li>
           <li class="dropdown">
-            <a href="#">more</a>
+            <a href="#"><span class="material-symbols-rounded">menu</span></a>
             <ul class="dropdown-content">
               <li><a href="{{ url_for('tutorial') }}">tutorial</a></li>
               <li><a href="{{ url_for('help') }}">help</a></li>
