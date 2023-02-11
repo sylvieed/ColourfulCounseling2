@@ -136,6 +136,7 @@ body {
 .upload::file-selector-button {
     border: none;
     background-color: #9695D4;
+    color:white
 }
 
 .box {

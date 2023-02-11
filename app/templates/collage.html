@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>What do you want to create about today?</h2>
+<h2 class = "title">What do you want to create today?</h2>
 
 <form method = "POST" enctype = "multipart/form-data">
     <select name="prompt" id="prompt">
@@ -8,8 +8,9 @@
             <option value="{{ prompt }}">{{ prompt }}</option>
         {% endfor %}
     </select>
-    <h3>Upload your image here</h3>
-    <input type="file" name="file" class="upload button"/>
-    <input type="submit"/>
+    <h3 class = "title">Upload your image here</h3>
+      <input type="file" name="file" class="upload"/>
+      <input type="submit"/>
+      
 </form>
 {% endblock %}
