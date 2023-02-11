@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="container">
+    <div class="container write">
         <div class="col">
-            <img src="{{ url_for('static', filename=image) }}">
+            <img src="{{ url_for('static', filename=image) }}" class="drawing">
         </div>
         <div class="col">
             <form method="POST">

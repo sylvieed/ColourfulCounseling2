@@ -26,6 +26,16 @@ body {
     background-color: #7b7aaf;
 }
 
+a {
+    text-decoration: none;
+    color: #7b7aaf;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #7b7aaf;
+}
+
 /* navbar */
 #navbar ul {
     list-style-type: none;
@@ -126,11 +136,11 @@ body {
     text-align: center;
     display: inline-block;
   }
-  
+
   .slide-button:hover {
     transform: translateX(20px);
   }
-  
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -155,8 +165,60 @@ body {
     width: 500px;
     margin: 0 auto;
     text-align: justify;
-  }
-  
-  
-  
-  
+}
+
+/* write page */
+
+.write .drawing {
+    max-width: 30em;
+}
+
+/* journals page */
+
+.entries {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.entry {
+    background-color: #fff6de;
+    padding: 20px 20px 20px 20px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    width: 15em;
+    box-shadow: 0 0 20px 8px #e3dfd5;
+    transition: all .2s ease-in;
+}
+
+.entry .date {
+    color: black;
+}
+
+.entry:hover {
+    background-color: #c4c3e0;
+}
+
+.entry:hover .title {
+    color: #fff6de;
+}
+
+.entry:hover .date {
+    color: #fff6de;
+}
+
+.entries a:hover {
+    text-decoration: none;
+}
+
+.entry .drawing {
+    width: 12em;
+}
+
+
+.journal-page .drawing {
+    margin: 1em;
+    max-width: 30em;
+}

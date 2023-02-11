@@ -45,9 +45,15 @@ def about():
 def resources():
     return render_template('resources.html')
 
+@app.route("/journal/<id>")
+def journal(id):
+    journal = db.session.query(models.Journal).get(id)
+    return render_template("journal.html",journal=journal)
+
 @app.route("/journals")
 def journals():
-    return render_template('journals.html', journals=models.Journal.query.all())
+    journals = db.session.query(models.Journal).all()
+    return render_template('journals.html', journals=journals)
 
 @app.route("/journals/new")
 def new():

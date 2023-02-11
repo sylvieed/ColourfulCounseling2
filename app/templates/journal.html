@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="journal-page">
+        <center class="journal-page">
+            <img src="{{ url_for('static', filename='uploads/'+journal.image) }}" class="drawing">
+            <h1 class="title">{{journal.title}}</h1>
+            <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
+            <h3>{{journal.prompt}}</h3>
+            <div class="title">What did you draw?</div><body>{{journal.entry1}}</body><br>
+            <div class="title">How did you feel before and after completing your work?</div><body>{{journal.entry2}}</body><br>
+            <div class="title">Write anything else about your artwork here:</div><body>{{journal.entry3}}</body><br>
+        </center>
+    </div>
+{% endblock %}
