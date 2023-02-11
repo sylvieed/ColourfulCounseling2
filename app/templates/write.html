@@ -6,8 +6,22 @@
             <img src="{{ url_for('static', filename=image) }}">
         </div>
         <div class="col">
-            Journal
+            <form method="POST">
+                <div class="field">
+                    <label for="prompt1" class="label">What did you draw?</label><br>
+                    <textarea name="prompt1" cols="80" rows="5"></textarea>
+                </div>
+                <div class="field">
+                    <label for="prompt2" class="label">How did you feel before and after completing your artwork?</label>
+                    <textarea name="prompt2" cols="80" rows="5"></textarea>
+                </div>
+                <div class="field">
+                    <label for="prompt3" class="label">Write anything else about your artwork here:</label>
+                    <textarea name="prompt3" cols="80" rows="5"></textarea>
+                </div>
+                <input type="submit"/>
+            </form>
         </div>
     </div>
-    
+
 {% endblock %}

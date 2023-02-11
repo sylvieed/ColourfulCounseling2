@@ -4,6 +4,13 @@
     <img src="{{ url_for('static', filename='past.gif') }}">
     <h4></h4>
         <body>Here you can view all past journal entries that you have collected over time.</body>
-    
-{% endblock %} 
 
+    {% for journal in journals %}
+        <h3>Journal</h3>
+        {{journal.prompt}}
+        {{journal.time_created}}
+        {{journal.entry1}}
+        {{journal.entry2}}
+        {{journal.entry3}}
+    {% endfor %}
+{% endblock %}
