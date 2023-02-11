@@ -2,13 +2,22 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.title {
+    color: #7b7aaf
+}
+
+#content {
+    display: grid;
+    place-items: center;
+}
+
 /* navbar */
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #7b7aaf;
 }
 
 li {
@@ -24,7 +33,7 @@ li a {
 }
 
 li a:hover {
-    background-color: #111;
+    background-color: #9695D4;
 }
 
 /* drawing */

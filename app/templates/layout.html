@@ -8,13 +8,15 @@
   </head>
   <body>
     <div id="navbar">
+      <div class="center">
         <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('new') }}">Start</a></li>
-            <li><a href="{{ url_for('journals') }}">Past Entries</a></li>
-            <li><a href="{{ url_for('resources') }}">Resources</a></li>
+          <li><a href="{{ url_for('home') }}">home</a></li>
+          <li><a href="{{ url_for('about') }}">about</a></li>
+          <li><a href="{{ url_for('new') }}">start</a></li>
+          <li><a href="{{ url_for('journals') }}">past entries</a></li>
+          <li><a href="{{ url_for('resources') }}">resources</a></li>
         </ul>
+      </div>
     </div>
     <div id="content">{% block content %}{% endblock %}</div>
   </body>
