@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 import os
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = "uploads/"
+app.config['UPLOAD_FOLDER'] = "static/uploads"
+app.config['SECRET_KEY'] = 'aufjshrugeioshnu'
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="colorfulcounseli",
@@ -19,6 +20,19 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 import models
 
+with app.open_resource('static/upload_prompts.txt') as f:
+    contents = f.read().decode("utf-8")
+    upload_prompts = contents.split('\n')
+with app.open_resource('static/draw_prompts.txt') as f:
+    contents = f.read().decode("utf-8")
+    draw_prompts = contents.split('\n')
+with app.open_resource('static/photograph_prompts.txt') as f:
+    contents = f.read().decode("utf-8")
+    photograph_prompts = contents.split('\n')
+with app.open_resource('static/collage_prompts.txt') as f:
+    contents = f.read().decode("utf-8")
+    collage_prompts = contents.split('\n')
+    
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -44,21 +58,21 @@ def photography():
     if request.method == "POST":
         pass
 
-    return render_template('photography.html')
+    return render_template('photography.html', prompts = photography_prompts)
 
 @app.route("/journals/collage", methods=["GET", "POST"])
 def collage():
     if request.method == "POST":
         pass
 
-    return render_template('collage.html')
+    return render_template('collage.html', prompts = collage_prompts)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
     if request.method == "POST":
         pass
 
-    return render_template('draw.html')
+    return render_template('draw.html', prompts = draw_prompts)
 
 @app.route("/journals/upload", methods=["GET", "POST"])
 def upload():
@@ -66,14 +80,16 @@ def upload():
         file = request.files['file']
         if file:
             filename = secure_filename(file.filename)
+            session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('journals'))
+            return redirect(url_for('write'))
 
-    return render_template('upload.html')
+    return render_template('upload.html', prompts = upload_prompts)
 
 @app.route("/journals/write")
 def write():
     if request.method == "POST":
         pass
 
-    return render_template('write.html')
+    image_path = "uploads/" + session['image']
+    return render_template('write.html', image=image_path)

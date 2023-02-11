@@ -16,7 +16,6 @@ body {
     background-color: #9695D4;
     color: #333333;
     padding: 2px 6px 2px 6px;
-    border: 2px solid #000000;
     margin: 3px;
     width: 6em;
     text-align: center;
@@ -112,8 +111,28 @@ li.dropdown {
     transition: transform 0.5s ease-in-out;
     width: 125px;
     text-align: center;
+    display: inline-block;
   }
   
   .slide-button:hover {
     transform: translateX(20px);
   }
+  
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.col {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.col.buttons {
+    flex-direction: row;
+    align-content: space-evenly;
+}
+
+.upload::file-selector-button {
+    border: none;
+    background-color: #9695D4;
+}
