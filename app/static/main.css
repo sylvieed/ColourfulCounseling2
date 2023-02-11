@@ -1,6 +1,6 @@
 body {
     font-family: "PT Sans", Calibri, Tahoma, sans-serif;
-    background-color: #FFFAED
+    background-color: #FFFAED;
 }
 
 .title {
@@ -232,9 +232,9 @@ a:hover {
     padding: 20px 20px 20px 20px;
     margin: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
+    border: 1px solid #cfcabc;
     text-align: center;
     width: 15em;
-    box-shadow: 0 0 20px 8px #e3dfd5;
     transition: all .2s ease-in;
 }
 
