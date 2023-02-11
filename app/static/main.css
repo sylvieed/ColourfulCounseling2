@@ -1,6 +1,6 @@
 body {
     font-family: "PT Sans", Calibri, Tahoma, sans-serif;
-    background-color: #FFFAED;
+    background-color: #FFFAED
 }
 
 .title {
@@ -27,19 +27,20 @@ body {
 }
 
 /* navbar */
-ul {
+#navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #7b7aaf;
+    height: 48px;
 }
 
-li {
+#navbar li {
     float: left;
 }
 
-li a {
+#navbar li a {
     display: block;
     color: white;
     text-align: center;
@@ -47,37 +48,47 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+#navbar li a:hover {
     background-color: #9695D4;
 }
 
-li.dropdown {
-    display: inline-block;
+#navbar li.dropdown {
+    display: block;
+    float: right;
 }
 
-.dropdown-content {
+#navbar .dropdown-content {
     display: none;
     position: absolute;
     background-color: #7b7aaf;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    right:8px;
+    top: 56px;
+    height: 43px;
 }
 
-.dropdown-content a {
+#navbar .dropdown-content a {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    text-align: left;
+
 }
 
-.dropdown-content a:hover {
+#navbar .dropdown-content a:hover {
     background-color: #9695D4;
 }
 
-.dropdown:hover .dropdown-content {
+#navbar .dropdown:hover .dropdown-content {
     display: block;
+}
+
+#navbar .icon {
+    font-size:x-large;
+    display: inline-block;
+    vertical-align: top;
 }
 
 /* drawing */
@@ -85,6 +96,7 @@ li.dropdown {
 #board {
     width: 500px;
     height: 500px;
+    background-color: white;
     border: 1px solid black;
     position: relative;
 }
@@ -136,5 +148,15 @@ li.dropdown {
 .upload::file-selector-button {
     border: none;
     background-color: #9695D4;
+    color:white
 }
 
+.box {
+    width: 500px;
+    margin: 0 auto;
+    text-align: justify;
+  }
+  
+  
+  
+  
