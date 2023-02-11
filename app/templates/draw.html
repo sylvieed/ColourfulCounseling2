@@ -20,11 +20,17 @@
     </div>
     <p>no mistakes, just happy accidents - bob ross</p>
     <div>
-        
-        <button id="save-button" style="background-color:#7b7aaf;  color: white; border-color: white;">Save</button>
+        <button id="save-button" class="button" >Save</button>
     </div>
 
-    </body>
+    <div class="upload">
+        <div>If you used the canvas above, please press the 'save' button and then upload the file here.<br>
+        Or upload an image of your art that you created elsewhere.</div>
+        <h3>Upload your image here</h3>
+        <input type="file" name="file" class="upload button"/>
+        <input type="submit" class="button" />
+    </div>
+
     <script>
         const board = document.getElementById("board");
         const colorPalette = document.getElementById("color-palette");
@@ -73,6 +79,6 @@
             link.href = canvas.toDataURL();
             link.click();
         });
-        </script>
+    </script>
 
 {% endblock %}

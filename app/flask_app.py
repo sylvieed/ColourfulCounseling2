@@ -20,9 +20,9 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 import models
 
-with app.open_resource('static/upload_prompts.txt') as f:
+with app.open_resource('static/sculpt_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    upload_prompts = contents.split('\n')
+    sculpt_prompts = contents.split('\n')
 with app.open_resource('static/draw_prompts.txt') as f:
     contents = f.read().decode("utf-8")
     draw_prompts = contents.split('\n')
@@ -80,8 +80,8 @@ def draw():
 
     return render_template('draw.html', prompts = draw_prompts)
 
-@app.route("/journals/upload", methods=["GET", "POST"])
-def upload():
+@app.route("/journals/sculpt", methods=["GET", "POST"])
+def sculpt():
     if request.method == "POST":
         file = request.files['file']
         prompt = request.form['prompt']
@@ -94,7 +94,7 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('write'))
 
-    return render_template('upload.html', prompts = upload_prompts)
+    return render_template('sculpt.html', prompts = sculpt_prompts)
 
 @app.route("/journals/write", methods=["GET", "POST"])
 def write():

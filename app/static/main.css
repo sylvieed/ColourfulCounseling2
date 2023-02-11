@@ -15,8 +15,10 @@ body {
 .button {
     text-decoration: none;
     background-color: #9695D4;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 10px 7px 10px;
     margin: 3px;
     width: 6em;
     text-align: center;
@@ -171,6 +173,27 @@ a:hover {
 
 .write .drawing {
     max-width: 30em;
+}
+
+.prompt {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.write.container {
+    position: fixed;
+    top: 8em;
+}
+
+.write .field textarea {
+    border: none;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #e3dfd5;
+}
+
+.write .field textarea:focus {
+    border: none;
+    outline: none !important;
 }
 
 /* journals page */
