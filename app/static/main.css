@@ -115,13 +115,13 @@ a:hover {
 .pen {
     width: 50px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 25px;
     display: inline-block;
     cursor: pointer;
 }
 
-/* slide buttons */
+/* slide buttons */s
 
 .slide-button {
     background-color: #7b7aaf;

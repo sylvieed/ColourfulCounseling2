@@ -2,21 +2,43 @@
 {% block content %}
 
 <h1 class = "title">What do you want to draw today?</h1>
-    <form method = "POST" enctype = "multipart/form-data">
-        <select name="prompt" id="prompt">
-            {% for prompt in prompts %}
-                <option value="{{ prompt }}">{{ prompt }}</option>
-            {% endfor %}
-        </select>
-    </form>
+<form method = "POST" enctype = "multipart/form-data">
+    <select name="prompt" id="prompt">
+      {% for prompt in prompts %}
+        <option value="{{ prompt }}">{{ prompt }}</option>
+      {% endfor %}
+    </select>
+    <select name="pen-size" id="pen-size">
+      <option value="2">2px</option>
+      <option value="4">4px</option>
+      <option value="6">6px</option>
+      <option value="8">8px</option>
+      <option value="10">10px</option>
+    </select>
+  </form>
+  
+  <script>
+    // Get the pen size dropdown menu
+    const penSizeSelect = document.getElementById("pen-size");
+  
+    // Listen for change events on the pen size dropdown menu
+    penSizeSelect.addEventListener("change", e => {
+      ctx.lineWidth = e.target.value;
+    });
+  </script>
+  
     
     <div id="board"></div>
     <div id="color-palette">
-        <div class="pen" id=s"red" style="background-color: red;"></div>
-        <div class="pen" id="green" style="background-color: green;"></div>
-        <div class="pen" id="blue" style="background-color: blue;"></div>
-        <div class="pen" id="yellow" style="background-color: yellow;"></div>
+        <div class="pen" id=s"red" style="background-color: #ef476f;"></div>
+        <div class="pen" id="yellow" style="background-color: #f77f00;"></div>
+        <div class="pen" id="yellow" style="background-color: #ffd166;"></div>
+        <div class="pen" id="green" style="background-color: #06d6a0;"></div>
+        <div class="pen" id="blue" style="background-color: #4cc9f0;"></div>
+        <div class="pen" id="blue" style="background-color: #5e60ce;"></div>
+        <div class="pen" id="blue" style="background-color: #9d4edd;"></div>
         <div class="pen" id="black" style="background-color: black;"></div>
+        <div class="pen" id="black" style="background-color: white;"></div>
     </div>
     <p>no mistakes, just happy accidents - bob ross</p>
     <div>
@@ -26,7 +48,7 @@
     <div class="upload">
         <div>If you used the canvas above, please press the 'save' button and then upload the file here.<br>
         Or upload an image of your art that you created elsewhere.</div>
-        <h3>Upload your image here</h3>
+        <h3 class="title">Upload your image here</h3>
         <input type="file" name="file" class="upload button"/>
         <input type="submit" class="button" />
     </div>
@@ -80,5 +102,7 @@
             link.click();
         });
     </script>
+
+    
 
 {% endblock %}
