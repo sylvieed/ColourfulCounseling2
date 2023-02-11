@@ -1,5 +1,6 @@
 body {
     font-family: "PT Sans", Calibri, Tahoma, sans-serif;
+    background-color: #FFFAED;
 }
 
 .title {
@@ -136,3 +137,4 @@ li.dropdown {
     border: none;
     background-color: #9695D4;
 }
+
