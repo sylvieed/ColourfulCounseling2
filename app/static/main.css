@@ -1,9 +1,9 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "PT Sans", Calibri, Tahoma, sans-serif;
 }
 
 .title {
-    color: #7b7aaf
+    color: #7b7aaf;
 }
 
 #content {
@@ -51,6 +51,35 @@ li a:hover {
     background-color: #9695D4;
 }
 
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #7b7aaf;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #9695D4;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 /* drawing */
 
 #board {
@@ -88,4 +117,3 @@ li a:hover {
   .slide-button:hover {
     transform: translateX(20px);
   }
-  
