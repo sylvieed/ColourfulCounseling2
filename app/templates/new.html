@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1 class="title">New Journal Entry</h1>
-    <p>Click to start your art therapy journey</p>
+    <img src="{{ url_for('static', filename='journal.gif') }}">
+      
+    <button class="slide-button" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
+    <button class="slide-button" onclick="window.location.href = '{{ url_for('collage') }}'">Collage</button>
+    <button class="slide-button" onclick="window.location.href = '{{ url_for('photography') }}'">Photograph</button>
+    <button class="slide-button" onclick="window.location.href = '{{ url_for('upload') }}'">Upload</button>
+
+
     
-    <a class="button" href="{{ url_for('draw') }}">Draw</a>
-    <a class="button" href="{{ url_for('collage') }}">Collage</a>
-    <a class="button" href="{{ url_for('photography') }}">Photograph</a>
-    <a class="button" href="{{ url_for('upload') }}">Upload</a>
 {% endblock %}
