@@ -7,8 +7,8 @@
 
     {% for journal in journals %}
     <p>
-        <h1 class="title">Journal</h1>
-        {{journal.time_created}}<br>
+        <h1 class="title">{{journal.title}}</h1>
+        {{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}<br>
         <h3>{{journal.prompt}}</h3>
         <center>
             <div class="title">What did you draw?</div><body>{{journal.entry1}}</body><br>

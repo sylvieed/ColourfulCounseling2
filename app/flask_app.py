@@ -80,6 +80,8 @@ def upload():
         file = request.files['file']
         prompt = request.form['prompt']
         session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
         if file:
             filename = secure_filename(file.filename)
             session['image'] = filename
@@ -95,7 +97,7 @@ def write():
         entry2 = request.form['prompt2']
         entry3 = request.form['prompt3']
 
-        journal = models.Journal(prompt=session['prompt'], entry1=entry1, entry2=entry2, entry3=entry3, image=session['image'], mood=5)
+        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=5)
         db.session.add(journal)
         db.session.commit()
 
