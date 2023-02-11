@@ -3,13 +3,25 @@
 <h1 class="title">What do you want to photgraph today?</h1>
 
 <form method = "POST" enctype = "multipart/form-data">
-    <select name="prompt" id="prompt">
+    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
         {% for prompt in prompts %}
             <option value="{{ prompt }}">{{ prompt }}</option>
         {% endfor %}
-    </select>
+    </select><br><br>
+    <div id="custom-prompt" style="display: none;">
+        <label for="custom-prompt">Your prompt:</label>
+        <input type="text" name="custom-prompt"></input><br><br>
+    </div>
+    <label for="title">Title your piece:</label>
+    <input type="text" name="title">
     <h3>Upload your image here</h3>
     <input type="file" name="file" class="upload button"/>
     <input type="submit" class="button" />
 </form>
+
+<script>
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == "Or, use your own prompt" ? 'block' : 'none';
+    }
+</script>
 {% endblock %}

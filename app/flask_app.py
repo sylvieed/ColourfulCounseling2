@@ -20,18 +20,19 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 import models
 
+your_own_prompt = "Or, use your own prompt"
 with app.open_resource('static/sculpt_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    sculpt_prompts = contents.split('\n')
+    sculpt_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/draw_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    draw_prompts = contents.split('\n')
+    draw_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/photography_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    photography_prompts = contents.split('\n')
+    photography_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/collage_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    collage_prompts = contents.split('\n')
+    collage_prompts = contents.split('\n') + [your_own_prompt]
 
 @app.route("/")
 def home():
@@ -62,21 +63,57 @@ def new():
 @app.route("/journals/photography", methods=["GET", "POST"])
 def photography():
     if request.method == "POST":
-        pass
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
 
     return render_template('photography.html', prompts = photography_prompts)
 
 @app.route("/journals/collage", methods=["GET", "POST"])
 def collage():
     if request.method == "POST":
-        pass
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title        
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
 
     return render_template('collage.html', prompts = collage_prompts)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
     if request.method == "POST":
-        pass
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
 
     return render_template('draw.html', prompts = draw_prompts)
 
@@ -84,7 +121,10 @@ def draw():
 def sculpt():
     if request.method == "POST":
         file = request.files['file']
-        prompt = request.form['prompt']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
         session['prompt'] = prompt
         title = request.form['title']
         session['title'] = title

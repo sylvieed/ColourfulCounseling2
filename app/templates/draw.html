@@ -3,19 +3,23 @@
 
 <h1 class = "title">What do you want to draw today?</h1>
 <form method = "POST" enctype = "multipart/form-data">
-    <select name="prompt" id="prompt">
-      {% for prompt in prompts %}
-        <option value="{{ prompt }}">{{ prompt }}</option>
-      {% endfor %}
-    </select>
-    <select name="pen-size" id="pen-size">
-      <option value="2">2px</option>
-      <option value="4">4px</option>
-      <option value="6">6px</option>
-      <option value="8">8px</option>
-      <option value="10">10px</option>
-    </select>
-  </form>
+    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
+        {% for prompt in prompts %}
+            <option value="{{ prompt }}">{{ prompt }}</option>
+        {% endfor %}
+    </select><br><br>
+    <div id="custom-prompt" style="display: none;">
+        <label for="custom-prompt">Your prompt:</label>
+        <input type="text" name="custom-prompt"></input><br><br>
+    </div>
+</form>
+  <select name="pen-size" id="pen-size">
+    <option value="2">2px</option>
+    <option value="4">4px</option>
+    <option value="6">6px</option>
+    <option value="8">8px</option>
+    <option value="10">10px</option>
+  </select>
   
   <script>
     // Get the pen size dropdown menu
@@ -25,9 +29,7 @@
     penSizeSelect.addEventListener("change", e => {
       ctx.lineWidth = e.target.value;
     });
-  </script>
-  
-    
+  </script>    
     <div id="board"></div>
     <div id="color-palette">
         <div class="pen" id=s"red" style="background-color: #ef476f;"></div>
@@ -48,7 +50,13 @@
     <div class="upload">
         <div>If you used the canvas above, please press the 'save' button and then upload the file here.<br>
         Or upload an image of your art that you created elsewhere.</div>
+<<<<<<< HEAD
         <h3 class="title">Upload your image here</h3>
+=======
+        <label for="title">Title your piece:</label>
+        <input type="text" name="title">
+        <h3>Upload your image here</h3>
+>>>>>>> 7e310524c0d535bff292c0fd5dd18a0fa6d0b067
         <input type="file" name="file" class="upload button"/>
         <input type="submit" class="button" />
     </div>
@@ -102,7 +110,15 @@
             link.click();
         });
     </script>
+<<<<<<< HEAD
 
     
 
+=======
+    <script>
+        function showDiv(divId, element) {
+            document.getElementById(divId).style.display = element.value == "Or, use your own prompt" ? 'block' : 'none';
+        }
+    </script>
+>>>>>>> 7e310524c0d535bff292c0fd5dd18a0fa6d0b067
 {% endblock %}
