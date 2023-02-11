@@ -1,6 +1,6 @@
 body {
     font-family: "PT Sans", Calibri, Tahoma, sans-serif;
-    background-color: #FFFAED;
+    background-color: #FFFAED
 }
 
 .title {
@@ -149,3 +149,12 @@ body {
     background-color: #9695D4;
 }
 
+.box {
+    width: 500px;
+    margin: 0 auto;
+    text-align: justify;
+  }
+  
+  
+  
+  
