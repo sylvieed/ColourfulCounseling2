@@ -81,6 +81,8 @@ li a:hover {
     position: relative;
     overflow: hidden;
     transition: transform 0.5s ease-in-out;
+    width: 100px;
+    text-align: center;
   }
   
   .slide-button:hover {
