@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<main>
+    <section id="getting-started">
+      <h1 class="title">Getting Started</h1>
+      <p>Welcome to our Art Therapy Website! To get started, simply click the "Start" button on the homepage and choose your preferred method of expression - draw, collage, or photograph. Once you've generated a prompt, you can start your journal entry and add your artwork and reflections. You can also view your past entries and browse resources in the expanded menu.</p>
+      <p>We hope you find our website helpful and supportive in your creative journey of self-discovery!</p>
+      <img src="{{ url_for('static', filename='help.gif') }}">
+    </section>
+    <section id="faq">
+      <h2 class="title">FAQ</h2>
+      <h3 class="title">What is Art Therapy?</h3>
+      <p>Art therapy is a form of psychotherapy that uses the creative process of art-making to improve a person's physical, mental, and emotional well-being. Our website offers a unique combination of tools for users to create artwork and keep a record of their journal entries, allowing them to not only visually capture their journey but also reflect on their growth and insights.</p>
+      <h3 class="title">Do I need to be an artist to use this website?</h3>
+      <p>No, you don't need to be an artist to use our website! Art therapy is about the process, not the product, so it's about how making art makes you feel, not how it looks. Our website offers prompts to help you get started, but you're free to express yourself in any way that feels meaningful to you.</p>
+      <h3 class="title">Is this website a replacement for professional art therapy?</h3>
+      <p>Our website complements traditional art therapy, but it's not meant to replace it. If you're looking for professional art therapy services in the greater Philadelphia area, we've got you covered. Check out the <a href = {{ url_for('resources') }}>resources tab</a>  for more information.</p>
+    </section>
+    <section id="contact-us">
+      <h2 class="title">Contact Us</h2>
+      <p>If you have any questions or need help with our Art Therapy Website, please don't hesitate <a href= {{ url_for('contact') }}>to reach out to us.</a> We're here to support you in your creative journey of self-discovery!</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; ColorfulCounseling</p>
+  </footer>
+  {% endblock %}
