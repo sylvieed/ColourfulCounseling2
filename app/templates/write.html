@@ -1,1 +1,13 @@
 {% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="col">
+            <img src="{{ url_for('static', filename=image) }}">
+        </div>
+        <div class="col">
+            Journal
+        </div>
+    </div>
+    
+{% endblock %}

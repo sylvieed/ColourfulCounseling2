@@ -1,1 +1,15 @@
 {% extends "layout.html" %}
+{% block content %}
+<h2>What do you want to create about today?</h2>
+
+<form method = "POST" enctype = "multipart/form-data">
+    <select name="prompt" id="prompt">
+        {% for prompt in prompts %}
+            <option value="{{ prompt }}">{{ prompt }}</option>
+        {% endfor %}
+    </select>
+    <h3>Upload your image here</h3>
+    <input type="file" name="file" class="upload button"/>
+    <input type="submit"/>
+</form>
+{% endblock %}

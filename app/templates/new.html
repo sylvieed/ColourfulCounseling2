@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1 class="title">New Journal Entry</h1>
-    <img src="{{ url_for('static', filename='journal.gif') }}">
-      
-    <button class="slide-button" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
-    <button class="slide-button" onclick="window.location.href = '{{ url_for('collage') }}'">Collage</button>
-    <button class="slide-button" onclick="window.location.href = '{{ url_for('photography') }}'">Photograph</button>
-    <button class="slide-button" onclick="window.location.href = '{{ url_for('upload') }}'">Upload</button>
-
-
-    
+    <div class="container">
+        <div class="col">
+            <img src="{{ url_for('static', filename='journal.gif') }}">
+        </div>
+        <div class="col buttons">
+            <button class="slide-button" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
+            <button class="slide-button" onclick="window.location.href = '{{ url_for('collage') }}'">Collage</button>
+            <button class="slide-button" onclick="window.location.href = '{{ url_for('photography') }}'">Photograph</button>
+            <button class="slide-button" onclick="window.location.href = '{{ url_for('upload') }}'">Upload</button>
+        </div>
+    </div> 
 {% endblock %}
