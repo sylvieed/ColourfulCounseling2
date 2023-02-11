@@ -1,1 +1,10 @@
 {% extends "layout.html" %}
+{% block content %}
+    <h1 class="title">New Journal Entry</h1>
+    <p>Click to start your art therapy journey</p>
+    
+    <a class="button" href="{{ url_for('draw') }}">Draw</a>
+    <a class="button" href="{{ url_for('collage') }}">Collage</a>
+    <a class="button" href="{{ url_for('photography') }}">Photograph</a>
+    <a class="button" href="{{ url_for('upload') }}">Upload</a>
+{% endblock %}
