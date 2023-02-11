@@ -89,7 +89,7 @@ def collage():
             prompt = request.form['prompt']
         session['prompt'] = prompt
         title = request.form['title']
-        session['title'] = title        
+        session['title'] = title
         if file:
             filename = secure_filename(file.filename)
             session['image'] = filename
@@ -142,10 +142,15 @@ def write():
         entry1 = request.form['prompt1']
         entry2 = request.form['prompt2']
         entry3 = request.form['prompt3']
+        mood = request.form['mood']
 
-        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=5)
+        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=mood)
         db.session.add(journal)
         db.session.commit()
+
+        session['prompt'] = ''
+        session['title'] = ''
+        session['image'] = ''
 
         return redirect(url_for('journals'))
 
@@ -163,3 +168,4 @@ def help():
 @app.route("/contact")
 def contact():
     return render_template('contact.html')
+

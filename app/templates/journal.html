@@ -3,7 +3,25 @@
     <div class="journal-page">
         <center class="journal-page">
             <img src="{{ url_for('static', filename='uploads/'+journal.image) }}" class="drawing">
-            <h1 class="title">{{journal.title}}</h1>
+            <h1 class="title">
+                {{journal.title}}
+                {% if journal.mood == 1 %}
+                    😟
+                {% endif %}
+                {% if journal.mood == 2 %}
+                    😡
+                {% endif %}
+                {% if journal.mood == 3 %}
+                    😔
+                {% endif %}
+                {% if journal.mood == 4 %}
+                    😊
+                {% endif %}
+                {% if journal.mood == 5 %}
+                    😂
+                {% endif %}
+
+            </h1>
             <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
             <h3>{{journal.prompt}}</h3>
             <div class="title">What did you draw?</div><body>{{journal.entry1}}</body><br>

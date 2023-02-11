@@ -7,11 +7,28 @@
     <div class="entries">
         {% for journal in journals %}
         <a href="{{ url_for('journal',id=journal.id) }}">
-        <div class="entry">
-            <img src="{{ url_for('static', filename='uploads/'+journal.image) }}" class="drawing">
-            <h1 class="title">{{journal.title}}</h1>
-            <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
-        </div>
+            <div class="entry">
+                <img src="{{ url_for('static', filename='uploads/'+journal.image) }}" class="drawing">
+                <h1 class="title">
+                    {{journal.title}}
+                    {% if journal.mood == 1 %}
+                        😟
+                    {% endif %}
+                    {% if journal.mood == 2 %}
+                        😡
+                    {% endif %}
+                    {% if journal.mood == 3 %}
+                        😔
+                    {% endif %}
+                    {% if journal.mood == 4 %}
+                        😊
+                    {% endif %}
+                    {% if journal.mood == 5 %}
+                        😂
+                    {% endif %}
+                </h1>
+                <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
+            </div>
         </a>
         {% endfor %}
     </div>
