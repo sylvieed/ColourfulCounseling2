@@ -4,7 +4,12 @@
     <img src="{{ url_for('static', filename='home.gif') }}">
     <h4>The power of color, the comfort of counseling.</h4>
     <h2 class="title">Our Mission</h2>
-    <body>We want to empower individuals to unlock their creative potential and explore their emotions through the therapeutic process of art-making. We believe that everyone has the capacity to heal and grow through self-expression, and we strive to provide a safe and supportive virtual space for our users to do just that. Our website offers a unique combination of tools for users to create artwork and keep a record of their journal entries, allowing them to not only visually capture their journey but also reflect on their growth and insights. Our goal is to help individuals cultivate a deeper understanding of themselves and find joy and peace in the creative process.</body>
-    <h4><a href={{ url_for('about') }}>Learn more</a></h4>
+    <style>
+        .box {
+          width: 700px;
+        }
+      </style>
+    <p class="box">We want to empower individuals to unlock their creative potential and explore their emotions through the therapeutic process of art-making. We believe that everyone has the capacity to heal and grow through self-expression, and we strive to provide a safe and supportive virtual space for our users to do just that. Our website offers a unique combination of tools for users to create artwork and keep a record of their journal entries, allowing them to not only visually capture their journey but also reflect on their growth and insights. Our goal is to help individuals cultivate a deeper understanding of themselves and find joy and peace in the creative process.</p>
+    <h4 class ="box"><a href={{ url_for('about') }}>Learn more</a></h4>
 
 {% endblock %}
