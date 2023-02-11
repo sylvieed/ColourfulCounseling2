@@ -93,3 +93,15 @@ def write():
 
     image_path = "uploads/" + session['image']
     return render_template('write.html', image=image_path)
+
+@app.route("/tutorial")
+def tutorial():
+    return render_template('tutorial.html')
+
+@app.route("/help")
+def help():
+    return render_template('help.html')
+
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
