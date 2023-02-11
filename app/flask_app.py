@@ -26,9 +26,9 @@ with app.open_resource('static/upload_prompts.txt') as f:
 with app.open_resource('static/draw_prompts.txt') as f:
     contents = f.read().decode("utf-8")
     draw_prompts = contents.split('\n')
-with app.open_resource('static/photograph_prompts.txt') as f:
+with app.open_resource('static/photography_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    photograph_prompts = contents.split('\n')
+    photography_prompts = contents.split('\n')
 with app.open_resource('static/collage_prompts.txt') as f:
     contents = f.read().decode("utf-8")
     collage_prompts = contents.split('\n')
