@@ -32,7 +32,7 @@ with app.open_resource('static/photography_prompts.txt') as f:
 with app.open_resource('static/collage_prompts.txt') as f:
     contents = f.read().decode("utf-8")
     collage_prompts = contents.split('\n')
-    
+
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -47,7 +47,7 @@ def resources():
 
 @app.route("/journals")
 def journals():
-    return render_template('journals.html')
+    return render_template('journals.html', journals=models.Journal.query.all())
 
 @app.route("/journals/new")
 def new():
@@ -78,6 +78,8 @@ def draw():
 def upload():
     if request.method == "POST":
         file = request.files['file']
+        prompt = request.form['prompt']
+        session['prompt'] = prompt
         if file:
             filename = secure_filename(file.filename)
             session['image'] = filename
@@ -86,10 +88,18 @@ def upload():
 
     return render_template('upload.html', prompts = upload_prompts)
 
-@app.route("/journals/write")
+@app.route("/journals/write", methods=["GET", "POST"])
 def write():
     if request.method == "POST":
-        pass
+        entry1 = request.form['prompt1']
+        entry2 = request.form['prompt2']
+        entry3 = request.form['prompt3']
+
+        journal = models.Journal(prompt=session['prompt'], entry1=entry1, entry2=entry2, entry3=entry3, image=session['image'], mood=5)
+        db.session.add(journal)
+        db.session.commit()
+
+        return redirect(url_for('journals'))
 
     image_path = "uploads/" + session['image']
     return render_template('write.html', image=image_path)
