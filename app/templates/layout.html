@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>ColorfulCounseling</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about'}}">About</a></li>
+            <li><a href="{{ url_for('journals/new') }}">Start</a></li>
+            <li><a href="{{ url_for('journals') }}">Past entries</a></li>
+            <li><a href="{{ url_for('resources') }}">Resources</a></li>
+        </ul>
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+  </body>
+</html>
