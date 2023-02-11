@@ -3,18 +3,17 @@
     <h1 class="title">Past Entries</h1>
     <img src="{{ url_for('static', filename='past.gif') }}">
     <h4></h4>
-        <body>Here you can view all past journal entries that you have collected over time.</body>
-
-    {% for journal in journals %}
-    <p>
-        <h1 class="title">{{journal.title}}</h1>
-        {{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}<br>
-        <h3>{{journal.prompt}}</h3>
-        <center>
-            <div class="title">What did you draw?</div><body>{{journal.entry1}}</body><br>
-            <div class="title">How did you feel before and after completing your work?</div><body>{{journal.entry2}}</body><br>
-            <div class="title">Write anything else about your artwork here:</div><body>{{journal.entry3}}</body><br>
-        </center>
-    </p>
-    {% endfor %}
+        <body>Here you can view all past journal entries that you have collected over time.</body><br>
+    <div class="entries">
+        {% for journal in journals %}
+        <a href="{{ url_for('journal',id=journal.id) }}">
+            <div class="entry">
+                {{emojis}}
+                <img src="{{ url_for('static', filename='uploads/'+journal.image) }}" class="drawing">
+                <h1 class="title">{{journal.title}}</h1>
+                <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 {% endblock %}

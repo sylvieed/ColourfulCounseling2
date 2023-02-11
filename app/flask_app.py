@@ -20,18 +20,19 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 import models
 
-with app.open_resource('static/upload_prompts.txt') as f:
+your_own_prompt = "Or, use your own prompt"
+with app.open_resource('static/sculpt_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    upload_prompts = contents.split('\n')
+    sculpt_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/draw_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    draw_prompts = contents.split('\n')
+    draw_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/photography_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    photography_prompts = contents.split('\n')
+    photography_prompts = contents.split('\n') + [your_own_prompt]
 with app.open_resource('static/collage_prompts.txt') as f:
     contents = f.read().decode("utf-8")
-    collage_prompts = contents.split('\n')
+    collage_prompts = contents.split('\n') + [your_own_prompt]
 
 @app.route("/")
 def home():
@@ -45,9 +46,15 @@ def about():
 def resources():
     return render_template('resources.html')
 
+@app.route("/journal/<id>")
+def journal(id):
+    journal = db.session.query(models.Journal).get(id)
+    return render_template("journal.html",journal=journal)
+
 @app.route("/journals")
 def journals():
-    return render_template('journals.html', journals=models.Journal.query.all())
+    journals = db.session.query(models.Journal).all()
+    return render_template('journals.html', journals=journals)
 
 @app.route("/journals/new")
 def new():
@@ -56,29 +63,11 @@ def new():
 @app.route("/journals/photography", methods=["GET", "POST"])
 def photography():
     if request.method == "POST":
-        pass
-
-    return render_template('photography.html', prompts = photography_prompts)
-
-@app.route("/journals/collage", methods=["GET", "POST"])
-def collage():
-    if request.method == "POST":
-        pass
-
-    return render_template('collage.html', prompts = collage_prompts)
-
-@app.route("/journals/draw", methods=["GET", "POST"])
-def draw():
-    if request.method == "POST":
-        pass
-
-    return render_template('draw.html', prompts = draw_prompts)
-
-@app.route("/journals/upload", methods=["GET", "POST"])
-def upload():
-    if request.method == "POST":
         file = request.files['file']
-        prompt = request.form['prompt']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
         session['prompt'] = prompt
         title = request.form['title']
         session['title'] = title
@@ -88,7 +77,64 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('write'))
 
-    return render_template('upload.html', prompts = upload_prompts)
+    return render_template('photography.html', prompts = photography_prompts)
+
+@app.route("/journals/collage", methods=["GET", "POST"])
+def collage():
+    if request.method == "POST":
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
+
+    return render_template('collage.html', prompts = collage_prompts)
+
+@app.route("/journals/draw", methods=["GET", "POST"])
+def draw():
+    if request.method == "POST":
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
+
+    return render_template('draw.html', prompts = draw_prompts)
+
+@app.route("/journals/sculpt", methods=["GET", "POST"])
+def sculpt():
+    if request.method == "POST":
+        file = request.files['file']
+        if request.form['prompt'] == your_own_prompt:
+            prompt = request.form['custom-prompt']
+        else:
+            prompt = request.form['prompt']
+        session['prompt'] = prompt
+        title = request.form['title']
+        session['title'] = title
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
+
+    return render_template('sculpt.html', prompts = sculpt_prompts)
 
 @app.route("/journals/write", methods=["GET", "POST"])
 def write():
@@ -97,9 +143,13 @@ def write():
         entry2 = request.form['prompt2']
         entry3 = request.form['prompt3']
 
-        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=5)
+        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=mood)
         db.session.add(journal)
         db.session.commit()
+
+        session['prompt'] = ''
+        session['title'] = ''
+        session['image'] = ''
 
         return redirect(url_for('journals'))
 
@@ -117,3 +167,4 @@ def help():
 @app.route("/contact")
 def contact():
     return render_template('contact.html')
+
