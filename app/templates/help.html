@@ -3,7 +3,7 @@
 <main>
     <section id="getting-started">
       <h1 class="title">Getting Started</h1>
-      <p>Welcome to our Art Therapy Website! To get started, simply click the "Start" button on the homepage and choose your preferred method of expression - draw, collage, or photograph. Once you've generated a prompt, you can start your journal entry and add your artwork and reflections. You can also view your past entries and browse resources in the expanded menu.</p>
+      <p>Welcome to our Art Therapy Website! To get started, simply click the <a href = {{ url_for('journals') }}>start</a> tab on the homepage and choose your preferred method of expression - draw, collage, or photograph. Once you've generated a prompt, you can start your journal entry and add your artwork and reflections. You can also view your past entries and browse resources in the expanded menu.</p>
       <p>We hope you find our website helpful and supportive in your creative journey of self-discovery!</p>
       <img src="{{ url_for('static', filename='help.gif') }}">
     </section>
