@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tutorial Page</title>
+    <style>
+      /* Add styles for the tutorial page */
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-top: 50px;
+      }
+      ol {
+        font-size: 24px;
+        margin-top: 50px;
+      }
+      li {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class = "title" >Tutorial</h1>
+      <ol>
+        <li>Click on the "Start" tab</li>
+        <li>Click on the desired art form: Draw, Collage, Photograph, or Upload</li>
+        <li>Click the "Generate Prompt" button</li>
+        <li>Start journaling and use the provided tools to create your artwork</li>
+        <li>Click the "Save Journal Entry" button to save your work and reflect on your experience</li>
+      </ol>
+    </div>
+  </body>
+</html>
+
+{% endblock %}
