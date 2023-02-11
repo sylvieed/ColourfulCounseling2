@@ -2,15 +2,34 @@
 {% block content %}
 
 <h1 class = "title">What do you want to draw today?</h1>
-<audio loop src="{{ url_for('static', filename='celestia.mp3') }}" autoplay></audio>
-    <form method = "POST" enctype = "multipart/form-data">
-        <select name="prompt" id="prompt">
-            {% for prompt in prompts %}
-                <option value="{{ prompt }}">{{ prompt }}</option>
-            {% endfor %}
-        </select>
-    </form>
-    
+<form method = "POST" enctype = "multipart/form-data">
+    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
+        {% for prompt in prompts %}
+            <option value="{{ prompt }}">{{ prompt }}</option>
+        {% endfor %}
+    </select><br><br>
+    <div id="custom-prompt" style="display: none;">
+        <label for="custom-prompt">Your prompt:</label>
+        <input type="text" name="custom-prompt"></input><br><br>
+    </div>
+</form>
+  <select name="pen-size" id="pen-size">
+    <option value="2">2px</option>
+    <option value="4">4px</option>
+    <option value="6">6px</option>
+    <option value="8">8px</option>
+    <option value="10">10px</option>
+  </select>
+  
+  <script>
+    // Get the pen size dropdown menu
+    const penSizeSelect = document.getElementById("pen-size");
+  
+    // Listen for change events on the pen size dropdown menu
+    penSizeSelect.addEventListener("change", e => {
+      ctx.lineWidth = e.target.value;
+    });
+  </script>    
     <div id="board"></div>
     <div id="color-palette">
         <div class="pen" id=s"red" style="background-color: red;"></div>
@@ -21,8 +40,18 @@
     </div>
     <p>no mistakes, just happy accidents - bob ross</p>
     <div>
-        
-        <button id="save-button" style="background-color:#7b7aaf;  color: white; border-color: white;">Save</button>
+        <button id="save-button" class="button" >Save</button>
+    </div>
+
+    <div class="upload">
+        <div>If you used the canvas above, please press the 'save' button and then upload the file here.<br>
+        Or upload an image of your art that you created elsewhere.</div>
+        <h5></h5>
+        <label for="title" class="title"><b>Title your piece:</b></label>
+        <input type="text" name="title">
+        <h3 class ="title">Upload your image here</h3>
+        <input type="file" name="file" class="upload button"/>
+        <input type="submit" class="button" />
     </div>
 
     </body>
