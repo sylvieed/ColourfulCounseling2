@@ -26,3 +26,20 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+/* drawing */
+
+#board {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    position: relative;
+}
+.pen {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 25px;
+    display: inline-block;
+    cursor: pointer;
+}
