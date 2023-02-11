@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
-
-print("HELLO")
+app.config['UPLOAD_FOLDER'] = "uploads/"
 
 @app.route("/")
 def home():
@@ -45,10 +46,14 @@ def draw():
 
     return render_template('draw.html')
 
-@app.route("/journals/upload")
+@app.route("/journals/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "POST":
-        pass
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('journals'))
 
     return render_template('upload.html')
 
