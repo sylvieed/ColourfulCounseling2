@@ -129,11 +129,9 @@ def submit_mood():
     mood = int(request.form["mood"])
 
     # Insert the mood data into the database
-    conn = sqlite3.connect('mood_tracker.db')
-    c = conn.cursor()
-    c.execute("INSERT INTO mood_data (month, day, mood) VALUES (?, ?, ?)", (month, day, mood))
-    conn.commit()
-    conn.close()
+    mood = models.Mood(month = month, day = day, mood = mood)
+    db.session.add(mood)
+    db.session.commit()
 
     return ""
 
