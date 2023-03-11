@@ -9,18 +9,18 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "static/uploads"
 app.config['SECRET_KEY'] = 'aufjshrugeioshnu'
 
-# SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-#     username="colorfulcounseli",
-#     password="WinnerGirls!",
-#     hostname="colorfulcounseling.mysql.pythonanywhere-services.com",
-#     databasename="colorfulcounseli$journals",
-# )
-# app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-# app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username="colourfulcounsel",
+    password="pinkmonster",
+    hostname="colourfulcounseling.mysql.pythonanywhere-services.com",
+    databasename="colourfulcounsel$journals",
+)
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# db = SQLAlchemy(app)
-# import models
+db = SQLAlchemy(app)
+import models
 
 your_own_prompt = "Or, use your own prompt"
 with app.open_resource('static/sculpt_prompts.txt') as f:
