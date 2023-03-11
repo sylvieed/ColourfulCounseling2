@@ -1,17 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h1 class = "title">What do you want to draw today?</h1>
-<form method = "POST" enctype = "multipart/form-data">
-    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
-        {% for prompt in prompts %}
-            <option value="{{ prompt }}">{{ prompt }}</option>
-        {% endfor %}
-    </select><br><br>
-    <div id="custom-prompt" style="display: none;">
-        <label for="custom-prompt">Your prompt:</label>
-        <input type="text" name="custom-prompt"></input><br><br>
-    </div>
   <select name="pen-size" id="pen-size">
     <option value="2">2px</option>
     <option value="4">4px</option>
@@ -30,31 +19,20 @@
     });
   </script>
 
-  <script>
-    // Get the color wheel pen element
-    const colorWheelPen = document.querySelector('#color-wheel');
-
-    // Add a click event listener to the color wheel pen element
-    colorWheelPen.addEventListener('click', function() {
-    // Create a color picker input element
-    const colorPicker = document.createElement('input');
-    colorPicker.type = 'color';
-  
-    // Add an input event listener to the color picker element
-    colorPicker.addEventListener('input', function() {
-    // Get the selected color from the color picker
-    const selectedColor = colorPicker.value;
-    
-    // Set the background color of the color wheel pen element to the selected color
-    colorWheelPen.style.backgroundColor = selectedColor;
-  });
-  
-    // Show the color picker dialog
-    colorPicker.click();
-    });
-
   </script>
     <div id="board"></div>
+    <script>
+        const colorPickerPen = document.querySelector('#color-picker-pen');
+
+        colorPickerPen.addEventListener('input', function() {
+        // Get the selected color from the color picker
+        const selectedColor = colorPickerPen.value;
+
+        // Set the background color of the color picker pen to the selected color
+        colorPickerPen.style.backgroundColor = selectedColor;
+        });
+
+    </script>
     <div id="color-palette">
         <div class="pen" id="red" style="background-color: #ef476f;"></div>
         <div class="pen" id="orange" style="background-color: #f77f00;"></div>
@@ -65,8 +43,9 @@
         <div class="pen" id="purple" style="background-color: #9d4edd;"></div>
         <div class="pen" id="black" style="background-color: black;"></div>
         <div class="pen" id="white" style="background-color: white;"></div>
-        <div class="pen" id="color-wheel"></div>
-    </div>
+        <input type="color" id="color-picker-pen" class="pen" value="#000000">
+      </div>
+      
     <p>no mistakes, just happy accidents - bob ross</p>
     <div>
         <button id="save-button" class="button" >Save</button>
