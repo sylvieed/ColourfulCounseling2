@@ -3,7 +3,9 @@
 <audio loop src="{{ url_for('static', filename='violet.mp3') }}" autoplay></audio>
     <h1 class="title">New Journal Entry</h1>
             <img src="{{ url_for('static', filename='journal.gif') }}">
+            <h1 class = "title">What do you want to draw today?</h1>
         <div class="col buttons">
             <button class="slide-button button" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
+            <button class="slide-button button" onclick="window.location.href = '{{ url_for('draw') }}'">Upload</button>
         </div>
 {% endblock %}

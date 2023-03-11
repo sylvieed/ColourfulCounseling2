@@ -171,3 +171,30 @@ def help():
 def contact():
     return render_template('contact.html')
 
+@app.route("/moodtracker")
+def moodtracker():
+    return render_template('moodtracker.html')
+
+@app.route("/updatedfeatures")
+def updatedfeatures():
+    return render_template('updatedfeatures.html')
+
+@app.route("/")
+def index():
+    return render_template_string(open('index.html').read())
+
+
+@app.route("/submit_mood", methods=["POST"])
+def submit_mood():
+    month = int(request.form["month"])
+    day = int(request.form["day"])
+    mood = int(request.form["mood"])
+
+    # Insert the mood data into the database
+    conn = sqlite3.connect('mood_tracker.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO mood_data (month, day, mood) VALUES (?, ?, ?)", (month, day, mood))
+    conn.commit()
+    conn.close()
+
+    return ""
