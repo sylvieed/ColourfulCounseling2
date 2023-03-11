@@ -1,9 +1,11 @@
+from click import prompt
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 import os
 from flask_sqlalchemy import SQLAlchemy
 import urllib
 import time
+from app.promptGenarator import chatbot
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "static/uploads"
@@ -20,21 +22,20 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-import models
 
-your_own_prompt = "Or, use your own prompt"
-with app.open_resource('static/sculpt_prompts.txt') as f:
-    contents = f.read().decode("utf-8")
-    sculpt_prompts = contents.split('\n') + [your_own_prompt]
-with app.open_resource('static/draw_prompts.txt') as f:
-    contents = f.read().decode("utf-8")
-    draw_prompts = contents.split('\n') + [your_own_prompt]
-with app.open_resource('static/photography_prompts.txt') as f:
-    contents = f.read().decode("utf-8")
-    photography_prompts = contents.split('\n') + [your_own_prompt]
-with app.open_resource('static/collage_prompts.txt') as f:
-    contents = f.read().decode("utf-8")
-    collage_prompts = contents.split('\n') + [your_own_prompt]
+# your_own_prompt = "Or, use your own prompt"
+# with app.open_resource('static/sculpt_prompts.txt') as f:
+#     contents = f.read().decode("utf-8")
+#     sculpt_prompts = contents.split('\n') + [your_own_prompt]
+# with app.open_resource('static/draw_prompts.txt') as f:
+#     contents = f.read().decode("utf-8")
+#     draw_prompts = contents.split('\n') + [your_own_prompt]
+# with app.open_resource('static/photography_prompts.txt') as f:
+#     contents = f.read().decode("utf-8")
+#     photography_prompts = contents.split('\n') + [your_own_prompt]
+# with app.open_resource('static/collage_prompts.txt') as f:
+#     contents = f.read().decode("utf-8")
+#     collage_prompts = contents.split('\n') + [your_own_prompt]
 
 @app.route("/")
 def home():
@@ -58,10 +59,15 @@ def journals():
     journals = db.session.query(models.Journal).all()
     return render_template('journals.html', journals=journals)
 
-@app.route("/journals/new")
+@app.route("/journals/new", methods=["GET", "POST"])
 def new():
-    return render_template('new.html')
-    session["prompt"] = "Placeholder"
+    if request.method == "POST":
+        reply = chatbot("Generate a prompt")
+    else:
+        reply = chatbot("Generate a prompt")
+    session["prompt"] = reply
+    return render_template('new.html', prompt=reply)
+
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():

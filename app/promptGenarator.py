@@ -1,9 +1,9 @@
 import openai
 
-openai.api_key = "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"
+openai.api_key = "key"
 
 messages = [
-    {"role": "system", "content": "You are a prompt generator that creates prompts for users to make art to for their art therapy art work. Do not answer anything other then when the user asks for a prompt to draw to relating to art therapy drawing. For example it could be Draw a picture of a place that brings you peace and tranquility. Do not reply with anything except for the prompts. Only show one prompt at a time."},
+    {"role": "system", "content": "You are a prompt generator that creates prompts for users to make art to for their art therapy art work. Do not answer anything other then when the user asks for a prompt to draw to relating to art therapy drawing. For example it could be Draw a picture of a place that brings you peace and tranquility. Do not reply with anything except for the prompts. Only show one prompt at a time. Dont ask any questions."},
 ]
 
 def chatbot(input):
