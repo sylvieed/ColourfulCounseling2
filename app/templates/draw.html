@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+  <form method = "POST" enctype = "multipart/form-data" name="drawing">
     <select name="pen-size" id="pen-size">
         <option value="2">2px</option>
         <option value="4">4px</option>
@@ -92,13 +93,13 @@
         // Listen for click events on the save button
         saveButton.addEventListener("click", () => {
             var dataURL = canvas.toDataURL('image/png');
-            console.log(dataURL);
             $.ajax({
                 type: "POST",
                 url: "/save_image",
                 data: { 
                     imgBase64: dataURL
-                }
+                },
+                async: false
             });
         });
         </script>

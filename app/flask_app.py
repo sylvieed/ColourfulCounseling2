@@ -61,16 +61,11 @@ def journals():
 @app.route("/journals/new")
 def new():
     return render_template('new.html')
-
+    session["prompt"] = "Placeholder"
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
     if request.method == "POST":
-        if request.form['prompt'] == your_own_prompt:
-            prompt = request.form['custom-prompt']
-        else:
-            prompt = request.form['prompt']
-        session['prompt'] = prompt
         title = request.form['title']
         session['title'] = title
         return redirect(url_for('write'))
@@ -120,7 +115,6 @@ def updatedfeatures():
 @app.route("/")
 def index():
     return render_template_string(open('index.html').read())
-
 
 @app.route("/submit_mood", methods=["POST"])
 def submit_mood():
