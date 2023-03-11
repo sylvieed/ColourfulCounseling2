@@ -106,7 +106,7 @@ a:hover {
 /* drawing */
 
 #board {
-    width: 500px;
+    width: 1000px;
     height: 500px;
     background-color: white;
     border: 1px solid black;

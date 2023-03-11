@@ -29,17 +29,43 @@
       ctx.lineWidth = e.target.value;
     });
   </script>
+
+  <script>
+    // Get the color wheel pen element
+    const colorWheelPen = document.querySelector('#color-wheel');
+
+    // Add a click event listener to the color wheel pen element
+    colorWheelPen.addEventListener('click', function() {
+    // Create a color picker input element
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+  
+    // Add an input event listener to the color picker element
+    colorPicker.addEventListener('input', function() {
+    // Get the selected color from the color picker
+    const selectedColor = colorPicker.value;
+    
+    // Set the background color of the color wheel pen element to the selected color
+    colorWheelPen.style.backgroundColor = selectedColor;
+  });
+  
+    // Show the color picker dialog
+    colorPicker.click();
+    });
+
+  </script>
     <div id="board"></div>
     <div id="color-palette">
-        <div class="pen" id=s"red" style="background-color: #ef476f;"></div>
-        <div class="pen" id="yellow" style="background-color: #f77f00;"></div>
+        <div class="pen" id="red" style="background-color: #ef476f;"></div>
+        <div class="pen" id="orange" style="background-color: #f77f00;"></div>
         <div class="pen" id="yellow" style="background-color: #ffd166;"></div>
         <div class="pen" id="green" style="background-color: #06d6a0;"></div>
-        <div class="pen" id="blue" style="background-color: #4cc9f0;"></div>
+        <div class="pen" id="lightblue" style="background-color: #4cc9f0;"></div>
         <div class="pen" id="blue" style="background-color: #5e60ce;"></div>
-        <div class="pen" id="blue" style="background-color: #9d4edd;"></div>
+        <div class="pen" id="purple" style="background-color: #9d4edd;"></div>
         <div class="pen" id="black" style="background-color: black;"></div>
-        <div class="pen" id="black" style="background-color: white;"></div>
+        <div class="pen" id="white" style="background-color: white;"></div>
+        <div class="pen" id="color-wheel"></div>
     </div>
     <p>no mistakes, just happy accidents - bob ross</p>
     <div>
