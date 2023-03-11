@@ -1,17 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<h1 class = "title">What do you want to draw today?</h1>
-<form method = "POST" enctype = "multipart/form-data" name="drawing">
-    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
-        {% for prompt in prompts %}
-            <option value="{{ prompt }}">{{ prompt }}</option>
-        {% endfor %}
-    </select><br><br>
-    <div id="custom-prompt" style="display: none;">
-        <label for="custom-prompt">Your prompt:</label>
-        <input type="text" name="custom-prompt"></input><br><br>
-    </div>
     <select name="pen-size" id="pen-size">
         <option value="2">2px</option>
         <option value="4">4px</option>
@@ -30,18 +18,6 @@
         });
     </script>
     <div id="board"></div>
-    <script>
-        const colorPickerPen = document.querySelector('#color-picker-pen');
-
-        colorPickerPen.addEventListener('input', function() {
-        // Get the selected color from the color picker
-        const selectedColor = colorPickerPen.value;
-
-        // Set the background color of the color picker pen to the selected color
-        colorPickerPen.style.backgroundColor = selectedColor;
-        });
-
-    </script>
     <div id="color-palette">
         <div class="pen" id="red" style="background-color: #ef476f;"></div>
         <div class="pen" id="orange" style="background-color: #f77f00;"></div>
@@ -77,31 +53,40 @@
 
         // Get the 2D context of the canvas
         const ctx = canvas.getContext("2d");
-
+    </script>
+    <script>
+        const colorPicker = document.getElementById("color-picker-pen");
+      
+        // Listen for change events on the color picker input element
+        colorPicker.addEventListener("change", e => {
+          currentColor = e.target.value;
+        });
+      
+        // Listen for click events on the color palette
+        colorPalette.addEventListener("click", e => {
+          if (e.target.className === "pen") {
+            currentColor = window.getComputedStyle(e.target).backgroundColor;
+          }
+        });
+      
         // Listen for mouse events on the canvas
         let isDrawing = false;
         canvas.addEventListener("mousedown", e => {
-            isDrawing = true;
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
+          isDrawing = true;
+          ctx.beginPath();
+          ctx.moveTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
         });
         canvas.addEventListener("mouseup", () => (isDrawing = false));
         canvas.addEventListener("mouseout", () => (isDrawing = false));
         canvas.addEventListener("mousemove", e => {
-            if (isDrawing) {
+          if (isDrawing) {
             ctx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
-            ctx.strokeStyle = currentColor;
+            ctx.strokeStyle = currentColor; // Set the strokeStyle to the current color
             ctx.stroke();
-            }
+          }
         });
-
-        // Listen for click events on the color palette
-        colorPalette.addEventListener("click", e => {
-            if (e.target.className === "pen") {
-            currentColor = window.getComputedStyle(e.target).backgroundColor;
-            }
-        });
-
+      </script>
+    <script>
         const saveButton = document.getElementById("save-button");
 
         // Listen for click events on the save button
