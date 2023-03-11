@@ -21,18 +21,6 @@
 
   </script>
     <div id="board"></div>
-    <script>
-        const colorPickerPen = document.querySelector('#color-picker-pen');
-
-        colorPickerPen.addEventListener('input', function() {
-        // Get the selected color from the color picker
-        const selectedColor = colorPickerPen.value;
-
-        // Set the background color of the color picker pen to the selected color
-        colorPickerPen.style.backgroundColor = selectedColor;
-        });
-
-    </script>
     <div id="color-palette">
         <div class="pen" id="red" style="background-color: #ef476f;"></div>
         <div class="pen" id="orange" style="background-color: #f77f00;"></div>
@@ -46,7 +34,7 @@
         <input type="color" id="color-picker-pen" class="pen" value="#000000">
       </div>
       
-    <p>no mistakes, just happy accidents - bob ross</p>
+    <p>no mistakes, just happy acciden  ts - bob ross</p>
     <div>
         <button id="save-button" class="button" >Save</button>
     </div>
@@ -75,31 +63,40 @@
 
         // Get the 2D context of the canvas
         const ctx = canvas.getContext("2d");
-
+    </script>
+    <script>
+        const colorPicker = document.getElementById("color-picker-pen");
+      
+        // Listen for change events on the color picker input element
+        colorPicker.addEventListener("change", e => {
+          currentColor = e.target.value;
+        });
+      
+        // Listen for click events on the color palette
+        colorPalette.addEventListener("click", e => {
+          if (e.target.className === "pen") {
+            currentColor = window.getComputedStyle(e.target).backgroundColor;
+          }
+        });
+      
         // Listen for mouse events on the canvas
         let isDrawing = false;
         canvas.addEventListener("mousedown", e => {
-            isDrawing = true;
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
+          isDrawing = true;
+          ctx.beginPath();
+          ctx.moveTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
         });
         canvas.addEventListener("mouseup", () => (isDrawing = false));
         canvas.addEventListener("mouseout", () => (isDrawing = false));
         canvas.addEventListener("mousemove", e => {
-            if (isDrawing) {
+          if (isDrawing) {
             ctx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
-            ctx.strokeStyle = currentColor;
+            ctx.strokeStyle = currentColor; // Set the strokeStyle to the current color
             ctx.stroke();
-            }
+          }
         });
-
-        // Listen for click events on the color palette
-        colorPalette.addEventListener("click", e => {
-            if (e.target.className === "pen") {
-            currentColor = window.getComputedStyle(e.target).backgroundColor;
-            }
-        });
-
+      </script>
+    <script>
         const saveButton = document.getElementById("save-button");
 
         // Listen for click events on the save button
