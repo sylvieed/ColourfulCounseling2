@@ -1,17 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<h1 class = "title">What do you want to draw today?</h1>
-<form method = "POST" enctype = "multipart/form-data" name="drawing">
-    <select name="prompt" id="prompt" onchange="showDiv('custom-prompt', this)">
-        {% for prompt in prompts %}
-            <option value="{{ prompt }}">{{ prompt }}</option>
-        {% endfor %}
-    </select><br><br>
-    <div id="custom-prompt" style="display: none;">
-        <label for="custom-prompt">Your prompt:</label>
-        <input type="text" name="custom-prompt"></input><br><br>
-    </div>
     <select name="pen-size" id="pen-size">
         <option value="2">2px</option>
         <option value="4">4px</option>
