@@ -1,7 +1,6 @@
 # ColourfulCounseling
 
-Made during 2023 FemmeHacks.
-[This project on Devpost](https://devpost.com/software/colorfulcounseling)
+Made during 2023 Philly CodeFest.
 
 ### Music credits
 Celestia by [Ghostrifter Official](https://soundcloud.com/ghostrifter-official) | 
