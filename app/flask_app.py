@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 import os
-# from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+import urllib
+import time
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "static/uploads"
@@ -60,48 +62,10 @@ def journals():
 def new():
     return render_template('new.html')
 
-@app.route("/journals/photography", methods=["GET", "POST"])
-def photography():
-    if request.method == "POST":
-        file = request.files['file']
-        if request.form['prompt'] == your_own_prompt:
-            prompt = request.form['custom-prompt']
-        else:
-            prompt = request.form['prompt']
-        session['prompt'] = prompt
-        title = request.form['title']
-        session['title'] = title
-        if file:
-            filename = secure_filename(file.filename)
-            session['image'] = filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('write'))
-
-    return render_template('photography.html', prompts = photography_prompts)
-
-@app.route("/journals/collage", methods=["GET", "POST"])
-def collage():
-    if request.method == "POST":
-        file = request.files['file']
-        if request.form['prompt'] == your_own_prompt:
-            prompt = request.form['custom-prompt']
-        else:
-            prompt = request.form['prompt']
-        session['prompt'] = prompt
-        title = request.form['title']
-        session['title'] = title
-        if file:
-            filename = secure_filename(file.filename)
-            session['image'] = filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('write'))
-
-    return render_template('collage.html', prompts = collage_prompts)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
     if request.method == "POST":
-        file = request.files['file']
         if request.form['prompt'] == your_own_prompt:
             prompt = request.form['custom-prompt']
         else:
@@ -109,34 +73,9 @@ def draw():
         session['prompt'] = prompt
         title = request.form['title']
         session['title'] = title
-        if file:
-            filename = secure_filename(file.filename)
-            session['image'] = filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('write'))
-        else:
-            print("no file")
-
+        return redirect(url_for('write'))
+    
     return render_template('draw.html', prompts = draw_prompts)
-
-@app.route("/journals/sculpt", methods=["GET", "POST"])
-def sculpt():
-    if request.method == "POST":
-        file = request.files['file']
-        if request.form['prompt'] == your_own_prompt:
-            prompt = request.form['custom-prompt']
-        else:
-            prompt = request.form['prompt']
-        session['prompt'] = prompt
-        title = request.form['title']
-        session['title'] = title
-        if file:
-            filename = secure_filename(file.filename)
-            session['image'] = filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('write'))
-
-    return render_template('sculpt.html', prompts = sculpt_prompts)
 
 @app.route("/journals/write", methods=["GET", "POST"])
 def write():
@@ -156,8 +95,7 @@ def write():
 
         return redirect(url_for('journals'))
 
-    image_path = "uploads/" + session['image']
-    return render_template('write.html', image=image_path)
+    return render_template('write.html', image=session['image'])
 
 @app.route("/tutorial")
 def tutorial():
@@ -198,3 +136,16 @@ def submit_mood():
     conn.close()
 
     return ""
+
+@app.route('/save_image', methods=['POST'])
+def save_image():
+    imgData = request.form['imgBase64']
+    # convert to an image file
+    with urllib.request.urlopen(imgData) as response:
+        data = response.read()
+    # save the file, filename is the current time
+    now = time.strftime("%Y%m%d-%H%M%S")
+    with open("static/uploads/%s.png" % now, "wb") as fh:
+        fh.write(data)
+    session['image'] = "uploads/%s.png" % now
+    return 'success'
