@@ -1,12 +1,12 @@
 # ColourfulCounseling
 
-Made during 2023 Philly CodeFest.
+Made during 2023 Philly CodeFest. [Original project](https://github.com/sylvieed/ColourfulCounseling) made during 2023 FemmeHacks.
 
 ### Libraries used
 
-[Flask](https://github.com/pallets/flask)
-[SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
-[ImageAI](https://github.com/OlafenwaMoses/ImageAI)
+[Flask](https://github.com/pallets/flask),
+[SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy),
+[ImageAI](https://github.com/OlafenwaMoses/ImageAI),
 [OpenAI](https://github.com/openai/openai-python)
 
 ### Music credits
