@@ -8,7 +8,11 @@ prediction.setModelPath(os.path.join(execution_path, "resnet50-19c8e357.pth"))
 prediction.loadModel()
 
 def classify(image):
-  predictions, probabilities = prediction.classifyImage(os.path.join(execution_path, image), result_count=5 )
+  print("Classifying image...")
+  imagepath = os.path.join(execution_path, "car.jpg")
+  print(imagepath)
+  predictions, probabilities = prediction.classifyImage(imagepath, result_count=1 )
+  print("Image classified. Results:")
   for eachPrediction, eachProbability in zip(predictions, probabilities):
     print(eachPrediction , " : " , eachProbability)
   return (predictions, probabilities)
