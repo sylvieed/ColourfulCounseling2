@@ -1,8 +1,14 @@
 body {
-    font-family: "PT Sans", Calibri, Tahoma, sans-serif;
+    font-family: Gaegu;
+    font-weight: bold;
     background-color: #FFFAED;
 }
 
+@font-face {
+	font-family: Gaegu;
+	src: url(Gaegu-Regular.ttf);
+  }
+  
 .title {
     color: #7b7aaf;
 }
