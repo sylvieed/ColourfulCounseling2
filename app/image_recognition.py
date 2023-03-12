@@ -9,9 +9,9 @@ prediction.loadModel()
 
 def classify(image):
   print("Classifying image...")
-  imagepath = os.path.join(execution_path, "car.jpg")
+  imagepath = os.path.join(execution_path, image)
   print(imagepath)
-  predictions, probabilities = prediction.classifyImage(imagepath, result_count=1 )
+  predictions, probabilities = prediction.classifyImage(imagepath)
   print("Image classified. Results:")
   for eachPrediction, eachProbability in zip(predictions, probabilities):
     print(eachPrediction , " : " , eachProbability)
@@ -20,3 +20,6 @@ def classify(image):
 def guess(image):
   predictions, probabilities = classify(image)
   return predictions[0]
+
+if __name__ == "__main__":
+  classify('car.jpg')
