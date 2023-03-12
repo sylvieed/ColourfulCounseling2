@@ -104,8 +104,7 @@ def photo():
             filename = secure_filename(file.filename)
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # about = guess("static/uploads/"+filename)
-            about = session['title']
+            about = guess("static/uploads/"+filename)
             session['about'] = ""
             questions = generateQuestionsPhoto(session['prompt'],about)
             session['questions'] = questions
