@@ -22,20 +22,7 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-
-# your_own_prompt = "Or, use your own prompt"
-# with app.open_resource('static/sculpt_prompts.txt') as f:
-#     contents = f.read().decode("utf-8")
-#     sculpt_prompts = contents.split('\n') + [your_own_prompt]
-# with app.open_resource('static/draw_prompts.txt') as f:
-#     contents = f.read().decode("utf-8")
-#     draw_prompts = contents.split('\n') + [your_own_prompt]
-# with app.open_resource('static/photography_prompts.txt') as f:
-#     contents = f.read().decode("utf-8")
-#     photography_prompts = contents.split('\n') + [your_own_prompt]
-# with app.open_resource('static/collage_prompts.txt') as f:
-#     contents = f.read().decode("utf-8")
-#     collage_prompts = contents.split('\n') + [your_own_prompt]
+from app import models
 
 @app.route("/")
 def home():
@@ -59,15 +46,25 @@ def journals():
     journals = db.session.query(models.Journal).all()
     return render_template('journals.html', journals=journals)
 
-@app.route("/journals/new", methods=["GET", "POST"])
-def new():
+@app.route("/journals/draw-prompt")
+def draw_prompt():
     if request.method == "POST":
         reply = chatbot("Generate a prompt")
+        return redirect(url_for('draw')) 
     else:
         reply = chatbot("Generate a prompt")
     session["prompt"] = reply
-    return render_template('new.html', prompt=reply)
+    return render_template("draw_prompt.html", prompt=reply)
 
+@app.route("/journals/photo-prompt")
+def photo_prompt():
+    if request.method == "POST":
+        reply = chatbot("Generate a prompt")
+        return redirect(url_for('prompt')) 
+    else:
+        reply = chatbot("Generate a prompt")
+    session["prompt"] = reply
+    return render_template("photo_prompt.html", prompt=reply)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
@@ -76,7 +73,32 @@ def draw():
         session['title'] = title
         return redirect(url_for('write'))
     
-    return render_template('draw.html', prompts = draw_prompts)
+    return render_template('draw.html', prompt = session['prompt'])
+
+@app.route("/journals/draw/upload", methods=["GET", "POST"])
+def upload():
+    if request.method == "POST":
+        title = request.form['title']
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write'))
+        
+    return render_template('upload.html', prompt = session['prompt'])
+
+@app.route('/journals/photo', methods = ['GET', 'POST'])
+def photo():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
+            session['image'] = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('write')) 
+        
+    return render_template('photo.html', prompt = session['prompt'])
 
 @app.route("/journals/write", methods=["GET", "POST"])
 def write():
@@ -96,7 +118,7 @@ def write():
 
         return redirect(url_for('journals'))
 
-    return render_template('write.html', image=session['image'])
+    return render_template('write.html', image="uploads/"+session['image'])
 
 @app.route("/tutorial")
 def tutorial():
@@ -145,5 +167,5 @@ def save_image():
     now = time.strftime("%Y%m%d-%H%M%S")
     with open("static/uploads/%s.png" % now, "wb") as fh:
         fh.write(data)
-    session['image'] = "uploads/%s.png" % now
+    session['image'] = "%s.png" % now
     return 'success'
