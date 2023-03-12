@@ -2,6 +2,13 @@
 
 Made during 2023 Philly CodeFest.
 
+### Libraries used
+
+[Flask](https://github.com/pallets/flask)
+[SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
+[ImageAI](https://github.com/OlafenwaMoses/ImageAI)
+[OpenAI](https://github.com/openai/openai-python)
+
 ### Music credits
 Celestia by [Ghostrifter Official](https://soundcloud.com/ghostrifter-official) | 
 Music promoted by https://www.chosic.com/free-music/all/
