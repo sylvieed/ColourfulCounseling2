@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import urllib
 import time
 
-from app.promptGenarator import chatbot, generateQuestionsPhoto, generateQuestionsDrawing
+from app.promptGenarator import generatePrompts, generateQuestionsPhoto, generateQuestionsDrawing
 from app.image_recognition import guess
 
 app = Flask(__name__)
@@ -50,18 +50,18 @@ def journals():
 @app.route("/journals/draw-prompt", methods=["GET", "POST"])
 def draw_prompt():
     if request.method == "POST":
-        reply = chatbot("Generate a drawing prompt. Do not include any follow-up questions.")
+        reply = generatePrompts("Generate a drawing prompt. Do not include any follow-up questions.")
     else:
-        reply = chatbot("Generate a drawing prompt. Do not include any follow-up questions.")
+        reply = generatePrompts("Generate a drawing prompt. Do not include any follow-up questions.")
     session["prompt"] = reply
     return render_template("draw_prompt.html", prompt=reply)
 
 @app.route("/journals/photo-prompt", methods=["GET", "POST"])
 def photo_prompt():
     if request.method == "POST":
-        reply= chatbot("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
+        reply= generatePrompts("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
     else:
-        reply= chatbot("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
+        reply= generatePrompts("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
     session["prompt"] = reply
     return render_template("photo_prompt.html", prompt=reply)
 
