@@ -4,7 +4,7 @@ openai.api_key = "key"
 
 promptMessages = [
     {"role": "system",
-    "content": "You are a prompt generator that creates prompts for users to make art to for their art therapy art work. Do not answer anything other then when the user asks for a prompt to draw a picture to relating to art therapy drawing or photo. Only show one prompt at a time. Dont ask any questions."},
+    "content": "You are a prompt generator that creates prompts for users to make art to for their art therapy art work. Do not answer anything other then when the user asks for a prompt to draw a picture to relating to art therapy drawing or photo. Only show one prompt at a time. Dont ask any questions. Don't put quotes around the prompts."},
 ]
 
 def generatePrompts(input):
