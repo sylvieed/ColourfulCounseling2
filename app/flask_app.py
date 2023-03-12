@@ -50,16 +50,16 @@ def journals():
 @app.route("/journals/draw-prompt", methods=["GET", "POST"])
 def draw_prompt():
     if request.method == "POST":
-        reply = chatbot("Generate a prompt")
+        reply = chatbot("Generate a drawing prompt")
     else:
-        reply = chatbot("Generate a prompt")
+        reply = chatbot("Generate a drawing prompt")
     session["prompt"] = reply
     return render_template("draw_prompt.html", prompt=reply)
 
 @app.route("/journals/photo-prompt", methods=["GET", "POST"])
 def photo_prompt():
     if request.method == "POST":
-        reply= chatbot("Generate a prompt for a photo")
+        reply= chatbot("Generate a prompt about taking photos for art therapy")
     else:
         reply= chatbot("Generate a prompt about taking photos for art therapy")
     session["prompt"] = reply
