@@ -47,11 +47,10 @@ def journals():
     journals = db.session.query(models.Journal).all()
     return render_template('journals.html', journals=journals)
 
-@app.route("/journals/draw-prompt")
+@app.route("/journals/draw-prompt", methods=["GET", "POST"])
 def draw_prompt():
     if request.method == "POST":
         reply = chatbot("Generate a prompt")
-        return redirect(url_for('draw')) 
     else:
         reply = chatbot("Generate a prompt")
     session["prompt"] = reply
@@ -61,7 +60,6 @@ def draw_prompt():
 def photo_prompt():
     if request.method == "POST":
         reply= chatbot("Generate a prompt for a photo")
-        return redirect(url_for('photo')) 
     else:
         reply= chatbot("Generate a prompt about taking photos for art therapy")
     session["prompt"] = reply
