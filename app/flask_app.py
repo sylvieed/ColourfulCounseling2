@@ -60,12 +60,12 @@ def draw_prompt():
 @app.route("/journals/photo-prompt")
 def photo_prompt():
     if request.method == "POST":
-        reply = chatbot("Generate a prompt")
-        return redirect(url_for('prompt')) 
+        reply= chatbot("Generate a prompt for a photo")
+        return redirect(url_for('photo')) 
     else:
-        reply = chatbot("Generate a prompt")
+        reply= chatbot("Generate a prompt about taking photos for art therapy")
     session["prompt"] = reply
-    return render_template("photo_prompt.html", prompt=reply)
+    return render_template("photo_prompt.html", photoprompt=reply)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
