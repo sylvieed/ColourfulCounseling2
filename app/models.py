@@ -8,9 +8,8 @@ class Journal(db.Model):
     prompt = db.Column(db.String(200))
     title = db.Column(db.String(200))
     image = db.Column(db.String(200))
-    entry1 = db.Column(db.Text)
-    entry2 = db.Column(db.Text)
-    entry3 = db.Column(db.Text)
+    entries = db.Column(db.ARRAY(db.String(200)))
+    questions = db.Column(db.ARRAY(db.String(200)))
     mood = db.Column(db.Integer)
     
 class Mood(db.Model):

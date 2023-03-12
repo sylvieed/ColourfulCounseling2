@@ -5,7 +5,8 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 import urllib
 import time
-from app.promptGenarator import chatbot
+from app.promptGenarator import chatbot, generateQuestions
+from app.image_recognition import guess
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "static/uploads"
@@ -96,6 +97,9 @@ def photo():
             filename = secure_filename(file.filename)
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            about = guess("static/uploads/"+filename)
+            questions = generateQuestions(session['prompt'],about)
+            session['questions'] = questions
             return redirect(url_for('write')) 
         
     return render_template('photo.html', prompt = session['prompt'])
@@ -108,7 +112,12 @@ def write():
         entry3 = request.form['prompt3']
         mood = request.form['mood']
 
-        journal = models.Journal(prompt=session['prompt'], title=session['title'], image=session['image'], entry1=entry1, entry2=entry2, entry3=entry3, mood=mood)
+        journal = models.Journal(prompt=session['prompt'], 
+                                 title=session['title'], 
+                                 image=session['image'], 
+                                 questions=session['questions'],
+                                 entries=(entry1,entry2,entry3),
+                                 mood=mood)
         db.session.add(journal)
         db.session.commit()
 
@@ -118,7 +127,7 @@ def write():
 
         return redirect(url_for('journals'))
 
-    return render_template('write.html', image="uploads/"+session['image'])
+    return render_template('write.html', image="uploads/"+session['image'], questions=session['questions'])
 
 @app.route("/tutorial")
 def tutorial():
