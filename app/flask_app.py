@@ -1,10 +1,10 @@
-from click import prompt
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 import os
 from flask_sqlalchemy import SQLAlchemy
 import urllib
 import time
+
 from app.promptGenarator import chatbot, generateQuestionsPhoto, generateQuestionsDrawing
 from app.image_recognition import guess
 
@@ -71,10 +71,11 @@ def draw():
         title = request.form['title']
         session['title'] = title
         description = request.form['description']
+        session['about'] = description
         questions = generateQuestionsDrawing(session['prompt'],description)
         session['questions'] = questions
         return redirect(url_for('write'))
-    
+
     return render_template('draw.html', prompt = session['prompt'])
 
 @app.route("/journals/draw/upload", methods=["GET", "POST"])
@@ -82,15 +83,17 @@ def upload():
     if request.method == "POST":
         title = request.form['title']
         description = request.form['description']
+        session['about'] = description
         questions = generateQuestionsDrawing(session['prompt'],description)
         session['questions'] = questions
+        session['title'] = title
         file = request.files['file']
         if file:
             filename = secure_filename(file.filename)
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('write'))
-        
+
     return render_template('upload.html', prompt = session['prompt'])
 
 @app.route('/journals/photo', methods = ['GET', 'POST'])
@@ -101,11 +104,13 @@ def photo():
             filename = secure_filename(file.filename)
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            about = guess("static/uploads/"+filename)
+            # about = guess("static/uploads/"+filename)
+            about = session['title']
+            session['about'] = ""
             questions = generateQuestionsPhoto(session['prompt'],about)
             session['questions'] = questions
-            return redirect(url_for('write')) 
-        
+            return redirect(url_for('write'))
+
     return render_template('photo.html', prompt = session['prompt'])
 
 @app.route("/journals/write", methods=["GET", "POST"])
@@ -116,11 +121,16 @@ def write():
         entry3 = request.form['prompt3']
         mood = request.form['mood']
 
-        journal = models.Journal(prompt=session['prompt'], 
-                                 title=session['title'], 
-                                 image=session['image'], 
-                                 questions=session['questions'],
-                                 entries=(entry1,entry2,entry3),
+        journal = models.Journal(prompt=session['prompt'],
+                                 title=session['title'],
+                                 image=session['image'],
+                                 about=session['about'],
+                                 question1=session['questions'][0],
+                                 question2=session['questions'][1],
+                                 question3=session['questions'][2],
+                                 entry1=entry1,
+                                 entry2=entry2,
+                                 entry3=entry3,
                                  mood=mood)
         db.session.add(journal)
         db.session.commit()
@@ -152,10 +162,6 @@ def moodtracker():
 @app.route("/updatedfeatures")
 def updatedfeatures():
     return render_template('updatedfeatures.html')
-
-@app.route("/")
-def index():
-    return render_template_string(open('index.html').read())
 
 @app.route("/submit_mood", methods=["POST"])
 def submit_mood():

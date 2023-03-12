@@ -23,10 +23,11 @@
 
             </h1>
             <p class="date">{{journal.time_created.strftime("%B %d, %Y at %I:%M %p")}}</p><br>
-            <h3>{{journal.prompt}}</h3>
-            <div class="title">What did you draw?</div><body>{{journal.entry1}}</body><br>
-            <div class="title">How did you feel before and after completing your work?</div><body>{{journal.entry2}}</body><br>
-            <div class="title">Write anything else about your artwork here:</div><body>{{journal.entry3}}</body><br>
+            <body>{{journal.about}}</body>
+            <h3>Prompt: {{journal.prompt}}</h3>
+            <div class="title">{{journal.question1}}</div><body>{{journal.entry1}}</body><br>
+            <div class="title">{{journal.question2}}</div><body>{{journal.entry2}}</body><br>
+            <div class="title">{{journal.question3}}</div><body>{{journal.entry3}}</body><br>
         </center>
     </div>
 {% endblock %}
