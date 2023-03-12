@@ -208,10 +208,6 @@ a:hover {
     font-size: larger;
 }
 
-.write.container {
-    position: fixed;
-    top: 8em;
-}
 
 .write .field textarea {
     border: none;
@@ -229,10 +225,6 @@ a:hover {
     font-size: larger;
 }
 
-.write.container {
-    position: fixed;
-    top: 8em;
-}
 
 .write .field textarea {
     border: none;
@@ -294,4 +286,55 @@ a:hover {
 .journal-page .drawing {
     margin: 1em;
     max-width: 30em;
+}
+
+.prompt {
+    font-size: 2em;
+    margin-left: 1em;
+    display: inline-block;
+    width: 20em;
+}
+
+.shuffle {
+    display: inline-block;
+}
+
+.shuffle-button {
+    width: 15em;
+    border: none;
+    --bg-size: 400%;
+    --color-one: hsl(241, 25%, 58%);
+    --color-two: hsl(242, 46%, 88%);
+    background: linear-gradient(
+        90deg,
+        var(--color-one),
+        var(--color-two),
+        var(--color-one)
+        ) 0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: move-bg 8s infinite linear;
+}
+
+.shuffle-button:hover {
+    --bg-size: 400%;
+    --color-one: hsl(241, 33%, 44%);
+    --color-two: hsl(273, 65%, 75%);
+    background: linear-gradient(
+        90deg,
+        var(--color-one),
+        var(--color-two),
+        var(--color-one)
+        ) 0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: move-bg 8s infinite linear;
+}
+
+@keyframes move-bg {
+    to {
+        background-position: var(--bg-size) 0;
+    }
 }

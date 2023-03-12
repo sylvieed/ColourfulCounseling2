@@ -5,7 +5,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 import urllib
 import time
-from app.promptGenarator import chatbot, generateQuestions
+from app.promptGenarator import chatbot, generateQuestionsPhoto, generateQuestionsDrawing
 from app.image_recognition import guess
 
 app = Flask(__name__)
@@ -50,18 +50,18 @@ def journals():
 @app.route("/journals/draw-prompt", methods=["GET", "POST"])
 def draw_prompt():
     if request.method == "POST":
-        reply = chatbot("Generate a drawing prompt")
+        reply = chatbot("Generate a drawing prompt. Do not include any follow-up questions.")
     else:
-        reply = chatbot("Generate a drawing prompt")
+        reply = chatbot("Generate a drawing prompt. Do not include any follow-up questions.")
     session["prompt"] = reply
     return render_template("draw_prompt.html", prompt=reply)
 
 @app.route("/journals/photo-prompt", methods=["GET", "POST"])
 def photo_prompt():
     if request.method == "POST":
-        reply= chatbot("Generate a prompt about taking photos for art therapy")
+        reply= chatbot("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
     else:
-        reply= chatbot("Generate a prompt about taking photos for art therapy")
+        reply= chatbot("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
     session["prompt"] = reply
     return render_template("photo_prompt.html", photoprompt=reply)
 
@@ -70,6 +70,9 @@ def draw():
     if request.method == "POST":
         title = request.form['title']
         session['title'] = title
+        description = request.form['description']
+        questions = generateQuestionsDrawing(session['prompt'],description)
+        session['questions'] = questions
         return redirect(url_for('write'))
     
     return render_template('draw.html', prompt = session['prompt'])
@@ -78,6 +81,9 @@ def draw():
 def upload():
     if request.method == "POST":
         title = request.form['title']
+        description = request.form['description']
+        questions = generateQuestionsDrawing(session['prompt'],description)
+        session['questions'] = questions
         file = request.files['file']
         if file:
             filename = secure_filename(file.filename)
@@ -96,7 +102,7 @@ def photo():
             session['image'] = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             about = guess("static/uploads/"+filename)
-            questions = generateQuestions(session['prompt'],about)
+            questions = generateQuestionsPhoto(session['prompt'],about)
             session['questions'] = questions
             return redirect(url_for('write')) 
         
