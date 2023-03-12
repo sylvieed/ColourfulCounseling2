@@ -22,7 +22,7 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-from app import models
+# from app import models
 
 @app.route("/")
 def home():
