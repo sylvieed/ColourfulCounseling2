@@ -154,6 +154,7 @@ a:hover {
 
   .slide-button:hover {
     transform: translateX(20px);
+    background-color: #9695D4;
   }
 
   .button {
@@ -290,9 +291,21 @@ a:hover {
 
 .prompt {
     font-size: 2em;
-    margin-left: 1em;
     display: inline-block;
     width: 20em;
+    margin: 0;
+    padding: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.prompt-container {
+    padding: 1em 1em 0em 1em;
+    position: relative;
+}
+
+.prompt-btn {
+    margin-top: 0;
 }
 
 .shuffle {
@@ -300,6 +313,8 @@ a:hover {
 }
 
 .shuffle-button {
+    margin: 0;
+    padding: 0;
     width: 15em;
     border: none;
     --bg-size: 400%;

@@ -14,8 +14,9 @@
         <input type="hidden" name="prompt" value="{{ prompt }}">
     </form>
     <div class="buttons">
-        <button class="slide-button button" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
-        <button class="slide-button button" onclick="window.location.href = '{{ url_for('upload') }}'">Upload</button>
+        Continue with:
+        <button class="slide-button button prompt-btn" onclick="window.location.href = '{{ url_for('draw') }}'">Draw</button>
+        <button class="slide-button button prompt-btn" onclick="window.location.href = '{{ url_for('upload') }}'">Upload</button>
     </div>
     <script>
         function printOutput() {
