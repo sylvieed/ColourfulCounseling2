@@ -2,7 +2,7 @@
 {% block content %}
     <audio loop src="{{ url_for('static', filename='violet.mp3') }}" autoplay></audio>
     <h1 class="title">New Drawing Journal Entry</h1>
-    <img src="{{ url_for('static', filename='journal.gif') }}">
+    <img src="{{ url_for('static', filename='journal.gif') }}" width="40%">
 
     <form class="prompt-container" action="{{ url_for('draw_prompt') }}" method="POST">
         <div id="output" class="prompt">

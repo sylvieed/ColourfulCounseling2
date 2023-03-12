@@ -295,8 +295,8 @@ a:hover {
     width: 20em;
     margin: 0;
     padding: 0;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    -ms-transform: translateY(-25%);
+    transform: translateY(-25%);
 }
 
 .prompt-container {

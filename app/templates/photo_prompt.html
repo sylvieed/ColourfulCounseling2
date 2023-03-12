@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
     <audio loop src="{{ url_for('static', filename='violet.mp3') }}" autoplay></audio>
-    <h1 class="title">New Journal Entry for Photos</h1>
-    <img src="{{ url_for('static', filename='journal.gif') }}">
+    <h1 class="title">New Photo Journal Entry</h1>
+    <img src="{{ url_for('static', filename='journal.gif') }}" width="40%">
 
     <form class="prompt-container" action="{{ url_for('photo_prompt') }}" method="POST">
         <div id="output" class="prompt">
