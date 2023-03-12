@@ -4,15 +4,15 @@
     <h1 class="title">New Journal Entry for Photos</h1>
     <img src="{{ url_for('static', filename='journal.gif') }}">
 
-    <form action="{{ url_for('photo_prompt') }}" method="POST">
-        <button type="submit" class="btn btn-primary btn-lg button" name="button" value="generate_prompt">Generate</button>
-        <input type="hidden" name="prompt" value="{{ photoprompt }}">
+    <form class="prompt-container" action="{{ url_for('photo_prompt') }}" method="POST">
+        <div id="output" class="prompt">
+            {% if prompt %}{{ prompt }}{% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg button shuffle shuffle-button" name="button" value="generate_prompt">
+            <span class="material-symbols-rounded icon" style="font-size: 10em;">shuffle</span>
+        </button>
+        <input type="hidden" name="prompt" value="{{ prompt }}">
     </form>
-    <div id="output">
-        {% if photoprompt %}
-            <h4>{{ photoprompt }}</h4>
-        {% endif %}
-    </div>
     <div class="col buttons">
         <button class="slide-button button" onclick="window.location.href = '{{ url_for('photo') }}'">Upload</button>
     </div>

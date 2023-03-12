@@ -63,7 +63,7 @@ def photo_prompt():
     else:
         reply= chatbot("Generate a prompt about taking photos for art therapy. Do not include any follow-up questions.")
     session["prompt"] = reply
-    return render_template("photo_prompt.html", photoprompt=reply)
+    return render_template("photo_prompt.html", prompt=reply)
 
 @app.route("/journals/draw", methods=["GET", "POST"])
 def draw():
